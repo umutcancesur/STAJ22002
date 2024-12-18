@@ -1,0 +1,31 @@
+@model UserInfo;
+@{
+    ViewBag.Title = "Detaylar";
+}
+@{
+    var className = Model.WillAttend == true ? "primary" : "danger";
+}
+<div class="card text-center">
+    <h1>Kullanıcı Bilgileri</h1>
+    <div class="card-body">
+        <p>
+            <span class="badge bg-@className">@(Model.WillAttend == true ? "Katılıyor" : "Katılmıyor")</span>
+        </p>
+        <p><strong>Ad:</strong> @Model.Name</p>
+        <p><strong>E-posta:</strong> @Model.Email</p>
+        <p><strong>Telefon:</strong> @Model.Phone</p>
+        <a asp-controller="Meeting" asp-action="List" class="btn btn-@className">Katılımcı Listesi</a>
+    </div>
+</div>
+
+@if (Model.OtherReason != null)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            Katılmama Nedeni
+        </div>
+        <div class="card-body">
+            <p>@Model.OtherReason</p>
+        </div>
+    </div>
+}

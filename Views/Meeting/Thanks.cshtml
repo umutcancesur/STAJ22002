@@ -1,0 +1,27 @@
+@model UserInfo;
+@{
+ViewBag.Title = "Başvuru Durumu";
+}
+<main class="text-center">
+<h1 class="h4">Başvuru Durumu</h1>
+
+@if (Model.WillAttend == true)
+{
+    <p>Teşekkürler @Model.Name, toplantıya sizinle birlikte @ViewBag.UserCount kişi katılıyor</p>
+    <a class="btn btn-sm btn-outline-primary" asp-controller="Meeting" asp-action="List">Katılımcıları Listele</a>
+}
+else if (Model.WillAttend == false)
+{
+    <p>@Model.Name, toplantıya katılamadığınız için üzgünüz.</p>
+    <a class="btn btn-sm btn-outline-primary" asp-controller="Home" asp-action="Index">Anasayfa</a>
+    <span class="mx-2">veya</span>
+    <a class="btn btn-sm btn-outline-primary" asp-controller="Meeting" asp-action="List">Katılımcıları Listele</a>
+    
+}
+else
+{
+    <p>@Model.Name, toplantıya katılım durumunuz henüz belli değil.</p>
+    <a class="btn btn-sm btn-outline-primary" href="#">Katılım Durumunu Güncelle</a>
+}
+
+</main>

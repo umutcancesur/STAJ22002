@@ -1,0 +1,53 @@
+@model UserInfo
+@{
+ViewBag.Title = "Toplantı Katılım Formu";
+}
+<h1 class="h4 text-center">Toplantı Katılım Formu</h1>
+<form method="post">
+<div class="mb-3">
+    <label asp-for="Name" class="form-label">Adınız</label>
+    <input asp-for="Name" class="form-control" required>
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Phone" class="form-label">Telefon Numaranız</label>
+    <input asp-for="Phone" class="form-control" required>
+    <span asp-validation-for="Phone" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Email" class="form-label">Email Adresiniz</label>
+    <input asp-for="Email" class="form-control" required>
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="WillAttend" class="form-label">Katılım Durumu</label>
+    <select asp-for="WillAttend" class="form-select" onchange="toggleOtherReason()">
+        <option value="">Seçiniz</option>
+        <option value="true">Evet, katılacağım</option>
+        <option value="false">Hayır, katılamayacağım</option>
+    </select>
+    <span asp-validation-for="WillAttend" class="text-danger"></span>
+</div>
+<div class="mb-3" id="otherReasonDiv" style="display: none;">
+    <label asp-for="OtherReason" class="form-label">Açıklama</label>
+    <textarea asp-for="OtherReason" class="form-control" rows="3"></textarea>
+</div>
+
+    <button class="btn btn-sm btn-outline-primary" type="submit">Kaydet</button>
+</form>
+
+<script>
+function toggleOtherReason() {
+    var willAttend = document.getElementById('WillAttend');
+    var otherReasonDiv = document.getElementById('otherReasonDiv');
+    if (willAttend.value === 'false') {
+        otherReasonDiv.style.display = 'block';
+    } else {
+        otherReasonDiv.style.display = 'none';
+    }
+}
+</script>
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
